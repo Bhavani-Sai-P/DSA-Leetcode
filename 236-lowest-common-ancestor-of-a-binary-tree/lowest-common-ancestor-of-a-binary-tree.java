@@ -13,15 +13,20 @@ class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         traversal(root, p, q);
         return lca;
-    }
-    public int traversal(TreeNode curr, TreeNode p, TreeNode q) {
+    } 
+
+    public int traversal(TreeNode curr, TreeNode a, TreeNode b){
         int count = 0;
-        if (curr == null) return 0;
-        int ansOnLeft = traversal(curr.left, p, q);
-        int ansOnRight = traversal(curr.right, p, q);
-        if (curr.val== p.val || curr.val == q.val) count++;
-        count = ansOnLeft + ansOnRight + count;
-        if (count == 2 && lca == null) lca = curr;
+        if(curr==null) return 0;
+        int ansOnLeft = traversal(curr.left, a, b);
+        int ansOnRight = traversal(curr.right, a, b);
+        count = ansOnLeft+ansOnRight+count;
+        if(curr.val== a.val || curr.val==b.val){
+            count++;
+        }
+        if(count==2 && lca==null){
+            lca = curr;
+        }
         return count;
     }
 }
